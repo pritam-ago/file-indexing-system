@@ -53,7 +53,9 @@ void writeToFile(Node* root) {
     }
 
     fclose(fp);
-    printf("✅ File written successfully!\n");
+    refreshMetadata(fileNode);  // ✅ Update size & last-modified in BST
+    printf("✅ File written successfully! Metadata refreshed.\n");
+
 }
 
 int main() {

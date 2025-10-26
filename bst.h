@@ -24,5 +24,7 @@ void visualizeTree(Node* root, int space);
 void saveToCSV(Node* root, FILE* fp);
 Node* loadFromCSV(const char* filepath);
 Node* findNodeByName(Node* root, const char* filename);
+void refreshMetadata(Node* node);
+
 
 #endif

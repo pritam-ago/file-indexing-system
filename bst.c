@@ -136,6 +136,20 @@ void saveToCSV(Node* root, FILE* fp) {
     saveToCSV(root->right, fp);
 }
 
+void refreshMetadata(Node* node) {
+    if (!node) return;
+    struct stat st;
+    if (stat(node->path, &st) == 0) {
+        node->size = st.st_size;
+        struct tm *tm_info = localtime(&st.st_mtime);
+        strftime(node->last_modified, DATE_LEN, "%Y-%m-%d %H:%M:%S", tm_info);
+    } else {
+        node->size = 0;
+        strcpy(node->last_modified, "N/A");
+    }
+}
+
+
 Node* loadFromCSV(const char* filepath) {
     FILE* fp = fopen(filepath, "r");
     if (!fp) return NULL;
